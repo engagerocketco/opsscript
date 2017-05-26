@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "pivotal_changelog"
+require_relative "../lib/pivotal_changelog"
 
 token = ENV["PIVOTAL_TOKEN"]
 project_id = ENV["PIVOTAL_PROJECT_ID"]

@@ -28,7 +28,7 @@ class PivotalChangelog
   end
 
   def ioprint(story_type, stories)
-    printf STORY_TYPE_FMT % { type: story_type }
+    printf STORY_TYPE_FMT % { type: story_type.upcase }
 
     stories.each do |st|
       printf OUTPUT_FMT % { name: st.name, id: st.id }
@@ -36,6 +36,7 @@ class PivotalChangelog
   end
 
   def delivered_stories
-    project.stories(with_state: :delivered).group_by { |st| st.story_type }
+    (project.stories(with_state: :accepted, accepted_after: (Time.now - 6 * 86400).iso8601) +
+    project.stories(with_state: :delivered)).group_by { |st| st.story_type }
   end
 end
