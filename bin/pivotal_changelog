@@ -4,7 +4,13 @@ require_relative "../lib/pivotal_changelog"
 
 token = ENV["PIVOTAL_TOKEN"]
 project_id = ENV["PIVOTAL_PROJECT_ID"]
+password = ENV["PIVOTAL_MAIL_PASSWORD"]
 
-changelog = PivotalChangelog.new(token, project_id)
+changelog = PivotalChangelog.new(token: token, project_id: project_id).call
 
-changelog.call
+GmailMailServer.new(
+  subject: "Test",
+  from_email: "duykhoa12t@gmail.com",
+  send_mail_passw: password,
+  to_emails: [ "duykhoa12t+1@gmail.com", "duykhoa12t+receive2@gmail.com" ]
+).send!(message_content: changelog)

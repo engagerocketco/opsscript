@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'pivotal_changelog'
-  s.version     = '0.0.4'
+  s.version     = '0.0.5'
   s.licenses    = ['MIT']
   s.summary     = ""
   s.description = ""
@@ -9,7 +9,9 @@ Gem::Specification.new do |s|
   s.files       = ["lib/pivotal_changelog.rb"]
   s.homepage    = ''
   s.bindir      = 'bin'
+  s.require_path = 'lib'
   s.executables << 'pivotal_changelog'
 
-  s.add_development_dependency 'minitest', '~>0'
+  s.add_development_dependency 'minitest'
+  s.add_development_dependency 'tracker_api'
 end
