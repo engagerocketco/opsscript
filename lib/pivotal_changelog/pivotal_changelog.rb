@@ -1,4 +1,5 @@
 require "tracker_api"
+require "date"
 
 class PivotalChangelog
   STORY_URL = "https://www.pivotaltracker.com/story/show/"
@@ -37,13 +38,16 @@ class PivotalChangelog
   end
 
   def delivered_stories
-    (project.stories(with_state: :accepted, accepted_after: accept_after_str) +
+    (project.stories(with_state: :accepted, accepted_after: accept_after_monday) +
     project.stories(with_state: :delivered))
   end
 
   # TODO: Fix the window time
-  def accept_after_str
-    (Time.now - 5 * 86400).iso8601
+  def accept_after_monday
+    today = Date.today
+
+    monday = today - (today.wday - 1) % 7
+    monday.to_time.iso8601
   end
 
   def client
