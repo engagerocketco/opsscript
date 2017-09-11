@@ -6,7 +6,7 @@ class PivotalChangelog
   OUTPUT_FMT = "\s-\s%<name>s\s(%<story_url>s%<id>s)\n"
   STORY_TYPE_FMT = "%<type>s\n"
 
-  NOT_INCLUDED_STORIES_TYPE = [ :release ]
+  NOT_INCLUDED_STORIES_TYPE = [ "release" ]
 
   attr_reader :token, :project_id
 
@@ -15,8 +15,6 @@ class PivotalChangelog
     @project_id = options[:project_id]
 
     @sprint_duration = options[:sprint_duration] || 7
-    @release_dow = options[:release_dow] || 5
-
     @ptclient_klass = options[:ptclient_klass] || TrackerApi::Client
   end
 
@@ -24,6 +22,8 @@ class PivotalChangelog
     result = ""
 
     delivered_stories.group_by { |st| st.story_type }.each do |story_type, stories|
+      next if NOT_INCLUDED_STORIES_TYPE.include?(story_type)
+
       result << STORY_TYPE_FMT % { type: story_type.upcase }
       result << stories_output(stories)
     end
@@ -38,16 +38,15 @@ class PivotalChangelog
   end
 
   def delivered_stories
-    (project.stories(with_state: :accepted, accepted_after: accept_after_monday) +
-    project.stories(with_state: :delivered))
+    project.stories(with_state: :accepted, accepted_after: accept_after_monday) +
+    project.stories(with_state: :delivered)
   end
 
-  # TODO: Fix the window time
   def accept_after_monday
     today = Date.today
 
     monday = today - (today.wday - 1) % 7
-    monday.to_time.iso8601
+    (monday - (@sprint_duration - 7)) .to_time.iso8601
   end
 
   def client

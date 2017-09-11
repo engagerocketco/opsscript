@@ -9,17 +9,6 @@ class GmailMailServer
     @to_emails = options[:to_emails] || []
   end
 
-  def msgstr
-    # FIXME: check if to accepts multiple emails
-    msgstr = <<~END_OF_MESSAGE
-      From: Your Name <%<from_email>s>
-      To: <%<to_emails>s>
-      Subject: %<subject>s
-      MIME-Version: 1.0
-      %<message_content>s
-    END_OF_MESSAGE
-  end
-
   def msgstr_compiled(message_content)
     msgstr_compiled = msgstr % {
       from_email: @from_email,
@@ -43,4 +32,15 @@ class GmailMailServer
         @from_email, *@to_emails
     end
   end
+
+  def msgstr
+    msgstr = <<~END_OF_MESSAGE
+      From: Your Name <%<from_email>s>
+      To: <%<to_emails>s>
+      Subject: %<subject>s
+      MIME-Version: 1.0
+      %<message_content>s
+    END_OF_MESSAGE
+  end
+
 end
