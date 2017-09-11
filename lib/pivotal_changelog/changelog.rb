@@ -1,7 +1,7 @@
 require "tracker_api"
 require "date"
 
-class PivotalChangelog
+class Changelog
   STORY_URL = "https://www.pivotaltracker.com/story/show/"
   OUTPUT_FMT = "\s-\s%<name>s\s(%<story_url>s%<id>s)\n"
   STORY_TYPE_FMT = "%<type>s\n"
