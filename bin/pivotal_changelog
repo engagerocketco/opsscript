@@ -8,6 +8,7 @@
 #   ---
 #   subject: Default Subject line
 #   from_email: duykhoa12t@gmail.com
+#   from_name: Khoa Tran
 #   send_email_passwd: xxx
 #   to_emails:
 #    - duykhoa12t+test@gmail.com
