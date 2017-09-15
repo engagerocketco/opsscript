@@ -26,6 +26,7 @@ class Builder
     GmailMailServer.new(
       subject: config.subject,
       from_email: config.from_email,
+      from_name: config.from_name,
       send_mail_passw: config.send_email_passwd,
       to_emails: config.to_emails
     )

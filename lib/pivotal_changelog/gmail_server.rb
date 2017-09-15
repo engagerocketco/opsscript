@@ -4,6 +4,7 @@ require 'time'
 class GmailMailServer
   def initialize(options = {})
     @subject = options[:subject] || "Default Subject"
+    @from_name = options[:from_name] || "Default Name"
     @from_email = options[:from_email]
     @send_mail_passw = options[:send_mail_passw]
     @to_emails = options[:to_emails] || []
@@ -12,6 +13,7 @@ class GmailMailServer
   def msgstr_compiled(message_content)
     msgstr_compiled = msgstr % {
       from_email: @from_email,
+      from_name: @from_name,
       subject: @subject,
       to_emails: @to_emails.join(","),
       message_content: message_content
@@ -35,12 +37,11 @@ class GmailMailServer
 
   def msgstr
     msgstr = <<~END_OF_MESSAGE
-      From: Your Name <%<from_email>s>
+      From: %<from_name>s <%<from_email>s>
       To: <%<to_emails>s>
       Subject: %<subject>s
       MIME-Version: 1.0
       %<message_content>s
     END_OF_MESSAGE
   end
-
 end
