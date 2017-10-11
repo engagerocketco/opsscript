@@ -2,12 +2,6 @@ require "tracker_api"
 require "date"
 
 class Changelog
-  STORY_URL = "https://www.pivotaltracker.com/story/show/"
-  OUTPUT_FMT = "\s-\s%<name>s\s(%<story_url>s%<id>s)\n"
-  STORY_TYPE_FMT = "%<type>s\n"
-
-  NOT_INCLUDED_STORIES_TYPE = [ "release" ]
-
   attr_reader :token, :project_id
 
   def initialize(options = {})
@@ -18,23 +12,18 @@ class Changelog
     @ptclient_klass = options[:ptclient_klass] || TrackerApi::Client
   end
 
-  def call
-    result = ""
-
-    delivered_stories.group_by { |st| st.story_type }.each do |story_type, stories|
-      next if NOT_INCLUDED_STORIES_TYPE.include?(story_type)
-
-      result << STORY_TYPE_FMT % { type: story_type.upcase }
-      result << stories_output(stories)
-    end
-
-    result
+  def items
+    @items ||= delivered_stories.group_by { |st| st.story_type }
   end
 
-  def stories_output(stories)
-    stories.inject("") do |result, st|
-      result << OUTPUT_FMT % { name: st.name, id: st.id, story_url: STORY_URL }
-    end
+  def subject
+    @subject = items["release"]&.first&.name || "Release Note"
+  end
+
+  def get_binding
+    items
+    subject
+    binding
   end
 
   def delivered_stories

@@ -10,11 +10,11 @@ class GmailMailServer
     @to_emails = options[:to_emails] || []
   end
 
-  def msgstr_compiled(message_content)
+  def msgstr_compiled(message_content, subject)
     msgstr_compiled = msgstr % {
       from_email: @from_email,
       from_name: @from_name,
-      subject: @subject,
+      subject: subject,
       to_emails: @to_emails.join(","),
       message_content: message_content
     }
@@ -22,6 +22,7 @@ class GmailMailServer
 
   def send!(options = {})
     message_content = options[:message_content]
+    subject = options[:subject] || @subject
     smtp_server = options[:smtp_server] || 'smtp.gmail.com'
     smtp_port = options[:smtp_port] || 587
     domain = options[:domain] || "gmail.com"
@@ -30,7 +31,7 @@ class GmailMailServer
     smtp.enable_starttls
 
     smtp.start(domain, @from_email, @send_mail_passw, :login) do
-      smtp.send_message msgstr_compiled(message_content),
+      smtp.send_message msgstr_compiled(message_content, subject),
         @from_email, *@to_emails
     end
   end
@@ -40,6 +41,7 @@ class GmailMailServer
       From: %<from_name>s <%<from_email>s>
       To: <%<to_emails>s>
       Subject: %<subject>s
+      Content-type: text/html
       MIME-Version: 1.0
       %<message_content>s
     END_OF_MESSAGE

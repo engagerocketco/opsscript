@@ -14,6 +14,10 @@ class Builder
     end
   end
 
+  def template
+    Template.new(@config.template_path)
+  end
+
   def changelog
     Changelog.new(
       token: config.project_token,

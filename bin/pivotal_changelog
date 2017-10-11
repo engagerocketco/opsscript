@@ -37,8 +37,9 @@ builder = Builder.new(config_file)
 
 changelog = builder.changelog
 mail_server = builder.mail_server
+template = builder.template
 
 mail_server.send!(
-  message_content: changelog.call
+  message_content: template.render(changelog.get_binding),
+  subject: changelog.subject
 )
-

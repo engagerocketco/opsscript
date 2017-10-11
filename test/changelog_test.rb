@@ -20,8 +20,13 @@ class ChangelogTest < Minitest::Test
     @klass = Changelog
   end
 
-  def test_initialize
-    @changelog = Changelog.new(ptclient_klass: TrackerClientMock)
-    @changelog.call
+  def test_initialize_without_params
+    changelog = Changelog.new(ptclient_klass: TrackerClientMock)
+    assert_instance_of(Changelog, changelog)
+  end
+
+  def test_initializer_with_params
+    changelog = Changelog.new(ptclient_klass: TrackerClientMock, token: "abc", project_id: 123)
+    assert_instance_of(Changelog, changelog)
   end
 end
