@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+  </head>
+
+  <body>
+    <table width="100%" align="center" border="0" cellspacing="0" cellpadding="0" bgcolor="#c0b283" style="font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif; font-size: 16px; border-collapse: collapse">
+      <tr>
+        <td align="center">
+          <table width="550" cellpadding="0" cellpadding="0" style="border-collapse: collapse">
+            <tr>
+              <td>
+                <table border="0" width="100%" style="border-collapse: collapse" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td height="60px" bgcolor="#333" align="center" valign="middle">
+                      <a href="https://app.engagerocket.co">
+                        <img src="https://static1.squarespace.com/static/57bec227be65942037868934/t/57e7cda9414fb52bddd2a5af/1506662701786/?format=600w" alt="LOGO" width="300" style="max-width: 400px">
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td height="120" bgcolor="#f4f4f4" align="center" valign="middle" style="color: #c0b283; font-weight: 300;">
+                      <table>
+                        <tr>
+                          <td align="center" style="font-size: 25px;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
+                            <%= @subject %>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td align="center" style="font-size: 17px;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
+                            Bring to you by developer team
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td height="5" bgcolor="#c0b283"></td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <% @items.each do |key, item_arr| %>
+              <tr>
+                <td align="center">
+                  <table border="0" width="100%" style="border-collapse: collapse" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td height="50" valign="middle" align="center" bgcolor="#dcd0c0" style="font-size: 18px; color: #f4f4f4;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
+                        <%= key.upcase %>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <tr>
+                <td align="center">
+                  <table width="550" bgcolor="#f4f4f4" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse">
+                    <tr>
+                      <td style="padding: 20px;">
+                        <table style="color: #373737;">
+                          <% item_arr.each do |item| %>
+                            <tr>
+                              <td width="50%" style="font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
+                                <%= item.name %>
+                              </td>
+
+                              <td width="50%">
+                                <a href="<%= item.url %>" style="color: #373737;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
+                                  <%= item.url%>
+                                </a>
+                              </td>
+                            </tr>
+                          <% end %>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td>
+                <table width="100%" bgcolor="#dcd0c0" style="color: #c0b283; font-size: 10px; line-height: 17px;">
+                  <tr>
+                    <td align="center" style="padding: 10px 0;">
+                      <div>
+                        This release note email is sent by EngageRocket Developer Team.
+                      </div>
+
+                      <div>
+                        You're getting this email because you are a rocketer of EngageRocket.
+                      </div>
+
+                      <div>
+                      If you have any question, please contact us via
+                        <a href="mailto:hello+developer@engagerocket.co" style="color: #adadad;">
+                        hello+developer@engagerocket.co
+                        </a>
+                      </div>
+
+                      <div>
+                        © 2017, EngageRocket Pte Ltd. &middot; Block 71 Ayer Rajah Crescent, Singapore
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

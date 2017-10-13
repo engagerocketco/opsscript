@@ -1,3 +1,8 @@
+PATH
+  remote: .
+  specs:
+    pivotal_changelog (0.0.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -14,7 +19,7 @@ GEM
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     equalizer (0.0.11)
-    excon (0.55.0)
+    excon (0.57.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.11.0.1)
@@ -50,7 +55,8 @@ PLATFORMS
 
 DEPENDENCIES
   minitest
+  pivotal_changelog!
   tracker_api
 
 BUNDLED WITH
-   1.14.6
+   1.15.1

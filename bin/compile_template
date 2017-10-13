@@ -1,0 +1,63 @@
+#!/usr/bin/env ruby
+
+require_relative "../lib/pivotal_changelog"
+require "pry"
+require "ffaker"
+
+class DummyStory
+  def initialize
+    @name = FFaker::Lorem.sentence
+    @description = FFaker::Lorem.paragraph
+    @estimate = FFaker::Random.rand(8)
+    @url = FFaker::Internet.http_url
+  end
+
+  attr_accessor :name, :description, :estimate, :url
+end
+
+class DummyBinding
+  def get_binding
+    @items = {
+      "feature" => [
+        DummyStory.new,
+        DummyStory.new,
+        DummyStory.new,
+      ],
+
+      "bug" => [
+        DummyStory.new,
+        DummyStory.new,
+      ],
+
+      "chore" => [
+        DummyStory.new,
+        DummyStory.new,
+        DummyStory.new,
+        DummyStory.new,
+        DummyStory.new,
+      ],
+
+      "release" => [
+        DummyStory.new,
+      ]
+    }
+
+    binding
+  end
+end
+
+def compile!(output = :file)
+  template = Template.new
+  binding_obj = DummyBinding.new
+  result = template.render(binding_obj.get_binding)
+
+  case output
+  when :file
+    f = Tempfile.open(["pivotal_changelog", ".html"]) { |f| f << result }
+    system("open", f.path)
+  when :stdout
+    puts result
+  end
+end
+
+binding.pry
