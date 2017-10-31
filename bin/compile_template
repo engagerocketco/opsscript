@@ -42,6 +42,8 @@ class DummyBinding
       ]
     }
 
+    @subject = FFaker::Lorem.sentence
+
     binding
   end
 end
