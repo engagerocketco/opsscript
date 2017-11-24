@@ -13,11 +13,12 @@ class Changelog
   end
 
   def items
-    @items ||= delivered_stories.group_by { |st| st.story_type }
+    @items ||= delivered_stories.select { |st| st.story_type != "release" }.group_by { |st| st.story_type }
   end
 
   def subject
-    @subject = items["release"]&.first&.name || "Release Note"
+    releases = project.stories(with_story_type: "release")
+    @subject = releases.last&.name || "Release Note"
   end
 
   def get_binding
