@@ -24,6 +24,7 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.11.0.1)
       faraday (>= 0.7.4, < 1.0)
+    ffaker (2.7.0)
     ice_nine (0.11.2)
     minitest (5.10.2)
     multi_json (1.12.1)
@@ -54,9 +55,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  ffaker
   minitest
   pivotal_changelog!
   tracker_api
 
 BUNDLED WITH
-   1.15.1
+   1.16.0
