@@ -1,0 +1,31 @@
+version: '2'
+
+services:
+  bot:
+    image: ruby:2.4.2
+    environment:
+      - BUNDLE_PATH=/bundle
+    env_file: .env
+    depends_on:
+      - bundle
+    working_dir: /work
+    volumes:
+      - .:/work
+      - bundle_data:/bundle
+      - ./.pivotalconfig.yaml:/home/.pivotal_config.yaml
+    command: bundle exec ruby slack-bot/run.rb
+
+  bundle:
+    image: ruby:2.4.2
+    environment:
+      - BUNDLE_PATH=/bundle
+    working_dir: /work
+    volumes:
+      - bundle_data:/bundle
+      - ./Gemfile:/work/Gemfile
+      - ./Gemfile.lock:/work/Gemfile.lock
+      - ./pivotal_changelog.gemspec:/work/pivotal_changelog.gemspec
+    command: bundle install --jobs=4
+
+volumes:
+  bundle_data:
