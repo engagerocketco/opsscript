@@ -12,7 +12,7 @@ services:
     volumes:
       - .:/work
       - bundle_data:/bundle
-      - ./.pivotalconfig.yaml:/home/.pivotal_config.yaml
+      - ./.pivotalconfig.yaml:/home/.pivotalconfig.yaml
     command: bundle exec ruby slack-bot/run.rb
 
   bundle:

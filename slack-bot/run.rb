@@ -16,7 +16,7 @@ class PongBot < SlackRubyBot::Bot
 
     Encoding.default_external = "UTF-8"
 
-    config_file = "/home/.pivotal_config.yaml"
+    config_file = "/home/.pivotalconfig.yaml"
     builder = Builder.new(config_file)
 
     changelog = builder.changelog
