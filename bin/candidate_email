@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+require_relative "../lib/candidate_email"
+
+config_file = File.join(Environment.root, ".pivotalconfig.yaml")
+
+CandidateEmail.new(
+  config_file: config_file,
+  subject: "Hello from EngageRocket, Tech challenge",
+  content: "This is the test\n 1+1 = ?",
+  to_emails: [ "duykhoa12t+canyousolve@gmail.com" ]
+).send!
