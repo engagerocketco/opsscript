@@ -1,4 +1,3 @@
-require "erb"
 
 class Template
   def initialize(template_path = nil)
@@ -13,7 +12,11 @@ class Template
     File.read(@template_path)
   end
 
+  def template_path
+    File.join(Environment.root, @template_path)
+  end
+
   def default_template_path
-    File.expand_path File.join(__dir__, "..", "..", "templates", "changelog.html.erb")
+    File.join(Environment.root, "templates/index.html.erb")
   end
 end
