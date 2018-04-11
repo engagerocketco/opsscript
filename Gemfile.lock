@@ -78,6 +78,7 @@ GEM
       hashie
       websocket-driver
     thread_safe (0.3.6)
+    tilt (2.0.8)
     timers (4.1.2)
       hitimes
     tracker_api (1.7.1)
@@ -110,6 +111,7 @@ DEPENDENCIES
   minitest
   pivotal_changelog!
   slack-ruby-bot
+  tilt
   tracker_api
 
 BUNDLED WITH

@@ -6,19 +6,17 @@ class Changelog
 
   def initialize(options = {})
     @token = options[:token] || nil
-    @project_id = options[:project_id]
 
     @sprint_duration = options[:sprint_duration] || 7
     @ptclient_klass = options[:ptclient_klass] || TrackerApi::Client
   end
 
-  def items
-    @items ||= delivered_stories.select { |st| st.story_type != "release" }.group_by { |st| st.story_type }
+  def subject
+    @subject = format("Release Note - %<date>s", date: Date.today.to_s)
   end
 
-  def subject
-    releases = project.stories(with_story_type: "release")
-    @subject = releases.last&.name || "Release Note"
+  def items(project)
+    @items ||= delivered_stories(project).select { |st| st.story_type != "release" }.group_by { |st| st.story_type }
   end
 
   def get_binding
@@ -27,7 +25,7 @@ class Changelog
     binding
   end
 
-  def delivered_stories
+  def delivered_stories(project)
     project.stories(with_state: :accepted, accepted_after: accept_after_monday) +
     project.stories(with_state: :delivered)
   end
@@ -43,7 +41,7 @@ class Changelog
     @client ||= @ptclient_klass.new(token: token)
   end
 
-  def project
-    @project ||= client.project(project_id)
+  def projects
+    @project ||= client.projects
   end
 end

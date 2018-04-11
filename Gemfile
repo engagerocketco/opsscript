@@ -1,3 +1,8 @@
 source "https://rubygems.org"
 
-gemspec
+gem "tilt"
+gem "minitest"
+gem "tracker_api"
+gem "ffaker"
+gem "slack-ruby-bot"
+gem "celluloid-io"

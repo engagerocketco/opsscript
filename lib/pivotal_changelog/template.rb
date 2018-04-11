@@ -1,15 +1,12 @@
+require "tilt"
 
 class Template
   def initialize(template_path = nil)
     @template_path = template_path || default_template_path
   end
 
-  def render(binding)
-    ERB.new(load_template).result(binding)
-  end
-
-  def load_template
-    File.read(@template_path)
+  def render(changelog)
+    Tilt::ERBTemplate.new(@template_path).render(changelog)
   end
 
   def template_path

@@ -21,7 +21,6 @@ class Builder
   def changelog
     Changelog.new(
       token: config.project_token,
-      project_id: config.project_id,
       sprint_duration: config.sprint_duration
     )
   end
@@ -43,7 +42,6 @@ class Builder
       send_email_passwd: nil,
       to_emails: [],
       project_token: nil,
-      project_id: 123,
       sprint_duration: 7
     }
   end

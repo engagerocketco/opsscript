@@ -1,37 +1,7 @@
-#!/usr/bin/env ruby
-
-# An example how to use this tool
-
-# First, create a pivotalconfig file, follow this snippet
-
-# ```ruby
-#   ---
-#   subject: Default Subject line
-#   from_email: duykhoa12t@gmail.com
-#   from_name: Khoa Tran
-#   send_email_passwd: xxx
-#   to_emails:
-#    - duykhoa12t+test@gmail.com
-#    - duykhoa12t+new@gmail.com
-#   project_token: xxx
-#   project_id: yyy
-#   sprint_duration: 7
-#
-# Run the tool follow this command
-#
-#   ruby -Ilib bin/pivotal_changelog -c ~/.pivotalconfig.yaml
-
+require "pry"
 require_relative "../lib/pivotal_changelog"
 
-cli_args = ARGV.each_slice(2)
-
-config_file = nil
-
-cli_args.each do |x1, x2|
-  if x1 == "-c"
-    config_file = x2
-  end
-end
+config_file = "./.pivotalconfig.yaml"
 
 builder = Builder.new(config_file)
 
@@ -39,7 +9,12 @@ changelog = builder.changelog
 mail_server = builder.mail_server
 template = builder.template
 
-mail_server.send!(
-  message_content: template.render(changelog.get_binding),
-  subject: changelog.subject
-)
+file = Tempfile.open(["releasenote", ".html"]) do |f|
+  f << template.render(changelog)
+end
+
+system("open", file.path)
+#mail_server.send!(
+  #message_content: template.render(changelog.get_binding),
+  #subject: changelog.subject
+#)

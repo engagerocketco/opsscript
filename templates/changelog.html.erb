@@ -37,7 +37,7 @@
                             <table width="90%">
                               <tr>
                                 <td align="center" style="font-size: 25px;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
-                                  <%= @subject %>
+                                  <%= subject %>
                                 </td>
                               </tr>
 
@@ -56,18 +56,18 @@
               </td>
             </tr>
 
-            <% @projects.each do |project| %>
+            <% projects.each do |project| %>
               <tr>
                 <td height="5" bgcolor="#F2855E"></td>
               </tr>
 
               <tr>
                 <td align="center" height="70" valign="middle" style="font-size: 35px; color: #194769;" bgcolor="#D7EEF2">
-                  <%=project[:name]%>
+                  <%=project.name%>
                 </td>
               </tr>
 
-              <% project[:items].each do |key, item_arr| %>
+              <% items(project).each do |key, item_arr| %>
                 <tr>
                   <td align="center">
                     <table border="0" width="100%" style="border-collapse: collapse" cellspacing="0" cellpadding="0">
@@ -88,13 +88,13 @@
                           <table style="color: #194769;" width="100%">
                             <% item_arr.each do |item| %>
                               <tr>
-                                <td width="50%" style="font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
+                                <td width="75%" style="font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
                                   <%= item.name %>
                                 </td>
 
-                                <td width="50%">
+                                <td width="25%">
                                   <a href="<%= item.url %>" style="color: #194769;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif">
-                                    <%= item.url%>
+                                    <%= item.id%>
                                   </a>
                                 </td>
                               </tr>
