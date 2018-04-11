@@ -17,31 +17,44 @@ end
 
 class DummyBinding
   def get_binding
-    @items = {
-      "feature" => [
-        DummyStory.new,
-        DummyStory.new,
-        DummyStory.new,
-      ],
+    @projects = [
+      {
+        name: "EngageRocket",
+        items: {
+          "feature" => [
+            DummyStory.new,
+            DummyStory.new,
+            DummyStory.new,
+          ],
 
-      "bug" => [
-        DummyStory.new,
-        DummyStory.new,
-      ],
+          "bug" => [
+            DummyStory.new,
+            DummyStory.new,
+          ],
 
-      "chore" => [
-        DummyStory.new,
-        DummyStory.new,
-        DummyStory.new,
-        DummyStory.new,
-        DummyStory.new,
-      ],
+          "chore" => [
+            DummyStory.new,
+            DummyStory.new,
+            DummyStory.new,
+            DummyStory.new,
+            DummyStory.new,
+          ]
+        }
+      },
+      {
+        name: "360",
+        items: {
+          "feature" => [
+            DummyStory.new,
+            DummyStory.new,
+          ],
 
-      "release" => [
-        DummyStory.new,
-      ]
-    }
+          "bug" => [],
 
+          "chore" => []
+        }
+      }
+    ]
     @subject = FFaker::Lorem.sentence
 
     binding
