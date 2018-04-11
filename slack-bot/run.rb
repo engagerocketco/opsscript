@@ -19,7 +19,7 @@ class OpsBot < SlackRubyBot::Bot
     template = builder.template
 
     mail_server.send!(
-      message_content: template.render(changelog.get_binding),
+      message_content: template.render(changelog),
       subject: changelog.subject
     )
 

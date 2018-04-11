@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require "pry"
 require_relative "../lib/pivotal_changelog"
 
@@ -9,12 +11,13 @@ changelog = builder.changelog
 mail_server = builder.mail_server
 template = builder.template
 
-file = Tempfile.open(["releasenote", ".html"]) do |f|
-  f << template.render(changelog)
-end
+#file = Tempfile.open(["releasenote", ".html"]) do |f|
+#  f << template.render(changelog)
+#end
 
-system("open", file.path)
-#mail_server.send!(
-  #message_content: template.render(changelog.get_binding),
-  #subject: changelog.subject
-#)
+#system("open", file.path)
+
+mail_server.send!(
+  message_content: template.render(changelog),
+  subject: changelog.subject
+)

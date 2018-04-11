@@ -23,7 +23,7 @@ class GmailMailServer
   def send!(options = {})
     message_content = options[:message_content]
     subject = options[:subject] || @subject
-    smtp_server = options[:smtp_server] || 'smtp.gmail.com'
+    smtp_server = options[:smtp_server] || "smtp.gmail.com"
     smtp_port = options[:smtp_port] || 587
     domain = options[:domain] || "gmail.com"
 

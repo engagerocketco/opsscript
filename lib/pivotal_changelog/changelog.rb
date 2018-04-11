@@ -19,12 +19,6 @@ class Changelog
     @items ||= delivered_stories(project).select { |st| st.story_type != "release" }.group_by { |st| st.story_type }
   end
 
-  def get_binding
-    items
-    subject
-    binding
-  end
-
   def delivered_stories(project)
     project.stories(with_state: :accepted, accepted_after: accept_after_monday) +
     project.stories(with_state: :delivered)
