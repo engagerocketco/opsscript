@@ -24,7 +24,6 @@ services:
       - bundle_data:/bundle
       - ./Gemfile:/work/Gemfile
       - ./Gemfile.lock:/work/Gemfile.lock
-      - ./pivotal_changelog.gemspec:/work/pivotal_changelog.gemspec
     command: bundle install --jobs=4
 
 volumes:
