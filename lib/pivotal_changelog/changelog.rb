@@ -12,11 +12,11 @@ class Changelog
   end
 
   def subject
-    @subject = format("Release Note - %<date>s", date: Date.today.to_s)
+    format("Release Note - %<date>s", date: Date.today.to_s)
   end
 
   def items(project)
-    @items ||= delivered_stories(project).select { |st| st.story_type != "release" }.group_by { |st| st.story_type }
+    delivered_stories(project).select { |st| st.story_type != "release" }.group_by { |st| st.story_type }
   end
 
   def delivered_stories(project)
@@ -36,6 +36,6 @@ class Changelog
   end
 
   def projects
-    @project ||= client.projects
+    @projects ||= client.projects
   end
 end
