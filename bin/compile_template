@@ -14,7 +14,7 @@ class DummyStory
 end
 
 class DummyBinding
-  def get_binding
+  def initialize
     @projects = [
       {
         name: "EngageRocket",
@@ -53,8 +53,11 @@ class DummyBinding
         }
       }
     ]
-    @subject = FFaker::Lorem.sentence
 
+    @subject = FFaker::Lorem.sentence
+  end
+
+  def get_binding
     binding
   end
 end
@@ -67,10 +70,11 @@ def compile!(output = :file)
   case output
   when :file
     f = Tempfile.open(["pivotal_changelog", ".html"]) { |f| f << result }
-    system("open", f.path)
+    puts f.path
+    system("xdg-open", f.path)
   when :stdout
     puts result
   end
 end
 
-binding.pry
+binding.irb
