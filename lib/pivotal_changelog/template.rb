@@ -9,7 +9,7 @@ class Template
     @subject = changelog.subject
     @projects = changelog.projects
 
-    Tilt::ERBTemplate.new(@template_path).render(self, changelog: changelog)
+    Tilt.new(@template_path).render(self, changelog: changelog)
   end
 
   def template_path
