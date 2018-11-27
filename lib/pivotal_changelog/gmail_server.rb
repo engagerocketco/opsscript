@@ -29,8 +29,8 @@ class GmailMailServer
 
     mail = Mail.new
     mail["from"] = "#{from_name} <#{from_email}>"
-    mail["to"]   =   to_emails.join(",")
-    mail["subject"] =  subject
+    mail["to"] = to_emails.join(",")
+    mail["subject"] = subject
     mail.charset = "UTF-8"
     mail.content_transfer_encoding = "8bit"
 
