@@ -4,6 +4,4 @@ require_relative "./pivotal_changelog/gmail_server"
 require_relative "./pivotal_changelog/template"
 require_relative "./pivotal_changelog/environment"
 
-require "erb"
-
 Encoding.default_external = "UTF-8"

@@ -17,6 +17,6 @@ class Template
   end
 
   def default_template_path
-    File.join(Environment.root, "templates/changelog.html.erb")
+    File.join(Environment.root, "templates/changelog.html.haml")
   end
 end

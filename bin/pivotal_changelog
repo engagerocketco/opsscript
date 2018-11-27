@@ -2,26 +2,48 @@
 
 require "tempfile"
 require "byebug"
+require "ostruct"
 
 require_relative "../lib/pivotal_changelog"
 
 config_file = "./.pivotalconfig.yaml"
 
+class DummyChangelog
+  def subject
+    "Test subject 2018"
+  end
+
+  def projects
+    [
+      OpenStruct.new(name: "360"),
+      OpenStruct.new(name: "EE Revamp")
+    ]
+  end
+
+  def items(project)
+    {
+      bug: [ OpenStruct.new(name: "Incorrect insufficient rater error message", id: "162107725", url: "#") ] * 5,
+      feature: [ OpenStruct.new(name: "List Custom Reports in View mode Alphabetically (SP Group feature request)", id: "162107725", url: "#", estimate: 2) ] * 3
+    }
+  end
+end
+
 builder = Builder.new(config_file)
 
-changelog = builder.changelog
+#changelog = builder.changelog
 mail_server = builder.mail_server
 template = builder.template
 
+changelog = DummyChangelog.new
 file = Tempfile.open(["releasenote", ".html"]) do |f|
   f << template.render(changelog)
 end
 
-#system("xdg-open", file.path)
-#printf "Press enter to exit!"
-#gets.chomp
+system("xdg-open", file.path)
+printf "Press enter to exit!"
+gets.chomp
 
-mail_server.send!(
-  message_content: template.render(changelog),
-  subject: changelog.subject
-)
+#mail_server.send!(
+  #message_content: template.render(changelog),
+  #subject: changelog.subject
+#)
