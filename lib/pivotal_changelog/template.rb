@@ -6,7 +6,10 @@ class Template
   end
 
   def render(changelog)
-    Tilt::ERBTemplate.new(@template_path).render(changelog)
+    @subject = changelog.subject
+    @projects = changelog.projects
+
+    Tilt.new(@template_path).render(self, changelog: changelog)
   end
 
   def template_path
@@ -14,6 +17,6 @@ class Template
   end
 
   def default_template_path
-    File.join(Environment.root, "templates/changelog.html.erb")
+    File.join(Environment.root, "templates/changelog.html.haml")
   end
 end

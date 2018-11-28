@@ -1,5 +1,5 @@
-require 'net/smtp'
-require 'time'
+require "net/smtp"
+require "mail"
 
 class GmailMailServer
   def initialize(options = {})
@@ -10,19 +10,10 @@ class GmailMailServer
     @to_emails = options[:to_emails] || []
   end
 
-  def msgstr_compiled(message_content, subject)
-    msgstr_compiled = msgstr % {
-      from_email: @from_email,
-      from_name: @from_name,
-      subject: subject,
-      to_emails: @to_emails.join(","),
-      message_content: message_content
-    }
-  end
-
   def send!(options = {})
     message_content = options[:message_content]
     subject = options[:subject] || @subject
+
     smtp_server = options[:smtp_server] || "smtp.gmail.com"
     smtp_port = options[:smtp_port] || 587
     domain = options[:domain] || "gmail.com"
@@ -30,20 +21,28 @@ class GmailMailServer
     smtp = Net::SMTP.new smtp_server, smtp_port
     smtp.enable_starttls
 
-    smtp.start(domain, @from_email, @send_mail_passw, :login) do
-      smtp.send_message msgstr_compiled(message_content, subject),
-        @from_email, *@to_emails
+    smtp.start(domain, @from_email, @send_mail_passw, :login)
+
+    Mail.defaults do
+      delivery_method :smtp_connection, { connection: smtp }
     end
+
+    mail = Mail.new
+    mail["from"] = "#{from_name} <#{from_email}>"
+    mail["to"] = to_emails.join(",")
+    mail["subject"] = subject
+    mail.charset = "UTF-8"
+    mail.content_transfer_encoding = "8bit"
+
+    mail.html_part do
+      content_type "text/html; charset=UTF-8"
+      body message_content
+    end
+
+    mail.deliver!
+
+    smtp.finish
   end
 
-  def msgstr
-    msgstr = <<~END_OF_MESSAGE
-      From: %<from_name>s <%<from_email>s>
-      To: <%<to_emails>s>
-      Subject: %<subject>s
-      Content-type: text/html
-      MIME-Version: 1.0
-      %<message_content>s
-    END_OF_MESSAGE
-  end
+  attr_reader :from_name, :from_email, :to_emails, :subject
 end

@@ -1,0 +1,94 @@
+!!!
+%html{lang: "en"}
+  - star_char = "⭐"
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{charset: "UTF-8"}/
+    %title
+  %body
+    %table{align: "center", bgcolor: "#5a5c51", border: "0", cellpadding: "0", cellspacing: "0", style: "font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif; font-size: 16px; border-collapse: collapse", width: "100%"}
+      %tr
+        %td{height: "50"}
+      %tr
+        %td{align: "center"}
+          %table{cellpadding: "0", style: "border-collapse: collapse", width: "550"}
+            %tr
+              %td
+                %table{border: "0", cellpadding: "0", cellspacing: "0", style: "border-collapse: collapse", width: "100%"}
+                  %tr
+                    %td{bgcolor: "#1d2120", height: "10px", style: "border-top-left-radius: 10px; border-top-right-radius: 10px;"}
+                  %tr
+                    %td
+                      %table{cellpadding: "0", cellspacing: "0", style: "border-collapse: collapse", width: "100%"}
+                        %tr
+                          %td{align: "center", bgcolor: "#1d2120", height: "60px", valign: "middle"}
+                            %a{href: "https://app.engagerocket.co"}
+                              %img{alt: "EngageRocket Developer Team", src: "https://app.engagerocket.co/ER360-logo.png", style: "max-width: 250px;", width: "250"}/
+                        %tr
+                          %td{align: "center", bgcolor: "#1d2120", style: "color: #bcd5d1; font-weight: 300;", valign: "middle"}
+                            %table{width: "90%"}
+                              %tr
+                                %td{align: "center", style: "font-size: 25px; font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif"}
+                                  = @subject
+                              %tr
+                                %td{valign: "top", align: "center", height: "35", style: "font-size: 17px; font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif; color: #bcd5d1;"}
+                                  Brought to you by the development team.
+            - @projects.each do |project|
+              %tr
+                %td{bgcolor: "#5a5c51", height: "1"}
+              %tr
+                %td{align: "center", bgcolor: "#1d2120", height: "50", style: "font-size: 35px; color: #ba9077;", valign: "middle"}
+                  %span{style: "padding: 3px 20px; border-bottom: 1px solid #ba9077; display: inline-block;"}
+                    = project.name
+
+              - key_items = changelog.items(project)
+              - if key_items.empty?
+                %tr
+                  %td{align: "center", valign: "middle", bgcolor: "#1d2120"}
+                    %span{style: "font-size: 20px; color: #5a5c51; padding: 10px 25px; display: inline-block"}
+                      NOTHING.
+
+              - key_items.each do |key, item_arr|
+                %tr
+                  %td{align: "center"}
+                    %table{border: "0", cellpadding: "0", cellspacing: "0", style: "border-collapse: collapse", width: "100%"}
+                      %tr
+                        %td{align: "center", bgcolor: "#1d2120", height: "40", style: "font-size: 18px; color: #bcd5d1;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif", valign: "middle"}
+                          = key.upcase
+                %tr
+                  %td{align: "center"}
+                    %table{bgcolor: "#1d2120", border: "0", cellpadding: "0", cellspacing: "0", style: "border-collapse: collapse", width: "100%"}
+                      %tr
+                        %td{style: "padding: 5px 10px;"}
+                          %table{style: "color: #bcd5d1;", width: "100%"}
+                            - item_arr.each do |item|
+                              %tr
+                                %td{style: "font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif; padding-right: 10px", width: "75%"}
+                                  = item.name
+                                  - if item.estimate
+                                    = star_char * item.estimate.to_i
+
+                                %td{width: "25%", valign: "top"}
+                                  %a{href: "#{item.url}", style: "color: #bcd5d1;font-family: 'AvenirNext-Regular','Avenir Next',Avenir,Helvetica,Arial,sans-serif"}
+                                    = item.id
+            %tr
+              %td{bgcolor: "#5a5c51", height: "1"}
+            %tr
+              %td
+                %table{style: "color: #5a5c51; font-size: 10px; line-height: 17px;", width: "100%", bgcolor: "#1d2120"}
+                  %tr
+                    %td{align: "center", style: "padding: 10px 0;"}
+                      %div
+                        This release note email is sent by the EngageRocket Developers.
+                      %div
+                        You're getting this email because you are a rocketeer of EngageRocket.
+                      %div
+                        If you have any question, please contact us via
+                        %a{href: "mailto:hello+developer@engagerocket.co", style: "color: #5a5c51"}
+                          hello+developer@engagerocket.co
+                      %div{style: "color: #5a5c51; text-decoration: none;"}
+                        Copyright © #{Date.today.year}, EngageRocket Pte Ltd. · Block 71 Ayer Rajah Crescent, Singapore
+            %tr
+              %td{bgcolor: "#1d2120", height: "10px", style: "border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;"}
+            %tr
+              %td{height: "50"}

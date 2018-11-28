@@ -37,8 +37,8 @@ class Builder
 
   def default_config
     {
-      subject: "Default Subject line",
-      from_email: "duykhoa12t@gmail.com",
+      subject: "Hello from EngageRocket",
+      from_email: "hello@engagerocket.co",
       send_email_passwd: nil,
       to_emails: [],
       project_token: nil,
