@@ -2,12 +2,12 @@ require "slack-ruby-bot"
 require_relative "../lib/pivotal_changelog"
 
 class OpsBot < SlackRubyBot::Bot
-  command "ping" do |client, data, match|
-    client.say(text: "pong", channel: data.channel)
+  command "hi" do |client, data, match|
+    client.say(text: "Arf", channel: data.channel)
   end
 
   command "release-note" do |client, data, match|
-    text = "Request to send release note by <@#{data.user}>"
+    text = "Bork! <@#{data.user}>"
     client.say(text: text, channel: data.channel)
 
     config_file = "/home/.pivotalconfig.yaml"
@@ -22,7 +22,7 @@ class OpsBot < SlackRubyBot::Bot
       subject: changelog.subject
     )
 
-    client.say(text: "OK, Done! please check your email", channel: data.channel)
+    client.say(text: "Woof! Woof!", channel: data.channel)
   end
 end
 
