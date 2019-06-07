@@ -6,6 +6,14 @@ class OpsBot < SlackRubyBot::Bot
     client.say(text: "Arf", channel: data.channel)
   end
 
+  command "who\’s a good bot\?" do |client, data, match|
+    client.say(text: "\*pant\* \*pant\*", channel: data.channel)
+  end
+
+  command "bad bot" do |client, data, match|
+    client.say(text: "😢", channel: data.channel)
+  end
+
   command "release-note" do |client, data, match|
     text = "Bork! <@#{data.user}>"
     client.say(text: text, channel: data.channel)
