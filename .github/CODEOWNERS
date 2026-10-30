@@ -1,0 +1,12 @@
+# CODEOWNERS — opsscript
+# Owned by the legacy-platform team. Manage reviewers via team membership.
+# @engagerocketco/nomads may also approve: engineers who work across the whole
+# estate rather than inside one team.
+* @engagerocketco/legacy-platform @engagerocketco/nomads
+
+# --- Gate rules. These must stay LAST in the file. CODEOWNERS is last-match-wins,
+# --- so anything below them silently overrides them.
+/.github/workflows/     @engagerocketco/legacy-platform
+/CODEOWNERS             @engagerocketco/legacy-platform
+/.github/CODEOWNERS     @engagerocketco/legacy-platform
+/docs/CODEOWNERS        @engagerocketco/legacy-platform
